@@ -28,14 +28,6 @@ jobs:
         working-directory: ./infrastructuress
         run: terraform init
 
-      - name: Terraform Plan
-        working-directory: ./infrastructuress
-        run: terraform plan -out=tfplan
-
-      - name: Terraform Apply
-        working-directory: ./infrastructuress
-        run: terraform apply -auto-approve tfplan
-
       - name: Terraform Destroy
         working-directory: ./infrastructuress
         run: terraform destroy -auto-approve tfplan
