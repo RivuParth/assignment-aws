@@ -7,27 +7,39 @@ on:
 
 jobs:
   terraform:
+    name: 'Terraform Apply'
     runs-on: ubuntu-latest
 
     env:
-      AWS_REGION: us-east-1
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      TF_VAR_environment: dev
+      AWS_REGION: ${{ secrets.AWS_REGION }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0  
 
       - name: Terraform Init
-        run: terraform -chdir=infrastructure init
+        working-directory: ./infrastructure
+        run: terraform init
+
+      - name: Terraform Format Check
+        working-directory: ./infrastructure
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        working-directory: ./infrastructure
+        run: terraform validate
 
       - name: Terraform Plan
-        run: terraform -chdir=infrastructure plan -out=tfplan
+        working-directory: ./infrastructure
+        run: terraform plan -out=tfplan
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        run: terraform -chdir=infrastructure apply -auto-approve tfplan
+        working-directory: ./infrastructure
+        run: terraform apply -auto-approve tfplan
