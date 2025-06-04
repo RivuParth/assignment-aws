@@ -36,6 +36,3 @@ jobs:
         working-directory: ./infrastructuress
         run: terraform apply -auto-approve tfplan
 
-      - name: Terraform Destroy
-        working-directory: ./infrastructuress
-        run: terraform destroy -auto-approve
