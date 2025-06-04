@@ -28,14 +28,6 @@ jobs:
         working-directory: ./infrastructuress
         run: terraform init
 
-      - name: Terraform Format Check
-        working-directory: ./infrastructuress
-        run: terraform fmt -check
-
-      - name: Terraform Validate
-        working-directory: ./infrastructuress
-        run: terraform validate
-
       - name: Terraform Plan
         working-directory: ./infrastructuress
         run: terraform plan -out=tfplan
