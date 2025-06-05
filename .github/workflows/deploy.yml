@@ -34,5 +34,5 @@ jobs:
 
       - name: Terraform Apply
         working-directory: ./infrastructuress
-        run: terraform apply -auto-approve tfplan -lock=false
+        run: terraform apply -lock=false -auto-approve "tfplan"
 
