@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "environment" {
   description = "Environment name"
   type        = string
-  default     = "prod"
+  default     = "test"
 }
 
 variable "vpc_cidr" {
