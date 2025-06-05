@@ -28,4 +28,4 @@ jobs:
 
       - name: Terraform Destroy
         working-directory: ./infrastructuress
-        run: terraform destroy -auto-approve
+        run: terraform destroy -var-file=terraform.tfvars -auto-approve

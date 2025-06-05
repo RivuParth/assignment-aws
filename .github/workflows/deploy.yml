@@ -30,9 +30,9 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ./infrastructuress
-        run: terraform plan -out=tfplan
+        run: terraform plan -var-file=terraform.tfvars -out=tfplan -lock=false
 
       - name: Terraform Apply
         working-directory: ./infrastructuress
-        run: terraform apply -auto-approve tfplan
+        run: terraform apply -auto-approve tfplan -lock=false
 
