@@ -14,8 +14,8 @@ resource "aws_lb" "app_alb" {
 
 resource "aws_lb_target_group" "app_tg" {
   name     = "${var.environment}-tg"
-  port     = 80
-  protocol = "HTTP"
+  port     = var.port
+  protocol = var.protocol
   vpc_id   = module.vpc.vpc_id
 
   health_check {
@@ -34,8 +34,8 @@ resource "aws_lb_target_group" "app_tg" {
 
 resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.app_alb.arn
-  port              = 80
-  protocol          = "HTTP"
+  port              = var.port
+  protocol          = var.protocol
 
   default_action {
     type             = "forward"

@@ -5,11 +5,11 @@ resource "aws_security_group" "bastion_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description      = "Allow SSH from anywhere (or restrict as needed)"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"] 
+    description = "Allow SSH from anywhere (or restrict as needed)"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -39,11 +39,11 @@ resource "aws_security_group" "app_sg" {
   vpc_id      = module.vpc.vpc_id
 
   ingress {
-    description      = "Allow HTTP from ALB"
-    from_port        = 80
-    to_port          = 80
-    protocol         = "tcp"
-    security_groups  = [aws_security_group.alb_sg.id]
+    description     = "Allow HTTP from ALB"
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
   }
 
   egress {
@@ -101,7 +101,7 @@ resource "aws_security_group" "rds_sg" {
 
   ingress {
     description     = "Allow DB access from app servers"
-    from_port       = 3306  # Change to 5432 for PostgreSQL
+    from_port       = 3306 # Change to 5432 for PostgreSQL
     to_port         = 3306
     protocol        = "tcp"
     security_groups = [aws_security_group.app_sg.id]
