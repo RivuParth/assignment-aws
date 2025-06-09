@@ -18,7 +18,7 @@ def hello():
     return '''
     <html>
     <head>
-        <title>Hello Partha</title>
+        <title>Hello Parthaa</title>
         <style>
             body {
                 background-color: #f0f8ff;
