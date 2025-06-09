@@ -20,7 +20,7 @@ jobs:
         run: |
           aws ssm send-command \
             --document-name "AWS-RunShellScript" \
-            --instance-ids "i-xxxxxxxxxxxxxxxxx" \
+            --instance-ids "i-0619c51ec5f67d548" \
             --comment "Pull latest code and restart app" \
             --parameters commands='[
               "cd /var/www/app",
