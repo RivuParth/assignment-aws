@@ -37,7 +37,7 @@ def hello():
         </style>
     </head>
     <body>
-        <h1>Hello World!<br>From Partha 🚀</h1>
+        <h1>Hello World!<br> Partha 🚀</h1>
     </body>
     </html>
     '''
