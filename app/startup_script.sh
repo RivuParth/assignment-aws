@@ -5,13 +5,10 @@ yum update -y
 yum install -y python3 git
 pip3 install flask
 
-# Clone the repo (replace YOUR_USERNAME and YOUR_REPO)
+# Creating Flask app
+mkdir -p /var/www/app
 git clone https://github.com/RivuParth/assignment-aws /var/www/app
-
-cd /var/www/app/app
-
-# Run Flask app in background
-nohup python3 app.py &
+cd /var/www/app
 
 # ##--- Begin CloudWatch Agent Setup ---
 

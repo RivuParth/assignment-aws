@@ -9,21 +9,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Trigger SSM Command
-        uses: aws-actions/aws-cli-action@v1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-          inline: |
-            aws ssm send-command \
-              --document-name "AWS-RunShellScript" \
-              --instance-ids "i-xxxxxxxxxxxxxxxxx" \
-              --comment "Pull latest code and restart app" \
-              --parameters 'commands=[
-                "cd /var/www/app",
-                "git pull origin main",
-                "pkill -f app.py",
-                "nohup python3 app/app.py &"
-              ]' \
-              --output text
+
+      - name: Trigger SSM Command
+        run: |
+          aws ssm send-command \
+            --document-name "AWS-RunShellScript" \
+            --instance-ids "i-xxxxxxxxxxxxxxxxx" \
+            --comment "Pull latest code and restart app" \
+            --parameters commands='[
+              "cd /var/www/app",
+              "git pull origin main",
+              "pkill -f app.py",
+              "python3 app/app.py &"
+            ]' \
+            --output text
