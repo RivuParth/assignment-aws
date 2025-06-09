@@ -5,50 +5,13 @@ yum update -y
 yum install -y python3 git
 pip3 install flask
 
-# Creating Flask app
-mkdir -p /var/www/app
-cd /var/www/app
+# Clone the repo (replace YOUR_USERNAME and YOUR_REPO)
+git clone https://github.com/RivuParth/assignment-aws /var/www/app
 
-cat <<EOF > app.py
-from flask import Flask
-app = Flask(__name__)
+cd /var/www/app/app
 
-@app.route('/')
-def hello():
-    return '''
-    <html>
-    <head>
-        <title>Hello Parthaa</title>
-        <style>
-            body {
-                background-color: #f0f8ff;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                margin: 0;
-                font-family: Arial, sans-serif;
-            }
-            h1 {
-                font-size: 60px;
-                color: #2c3e50;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>Hello World!<br> by Partha Bh 🚀</h1>
-    </body>
-    </html>
-    '''
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
-EOF
-
-
-# Run Flask 
-python3 app.py &
+# Run Flask app in background
+nohup python3 app.py &
 
 # ##--- Begin CloudWatch Agent Setup ---
 
